@@ -3,7 +3,7 @@
     <vue-draggable-resizable
       :key="item.id"
       class="absolute flex justify-center items-center shadow-md"
-      :class="[`bg-${item.color}-500`]"
+      :class="getColor(item.color)"
       :x="item.top"
       :y="item.left"
       :w="100"
@@ -31,6 +31,15 @@ export default {
     order: {
       type: Number,
       required: true,
+    },
+  },
+  methods: {
+    getColor(color) {
+      return {
+        red: 'bg-red-500',
+        green: 'bg-green-500',
+        blue: 'bg-blue-500',
+      }[color]
     },
   },
 }
