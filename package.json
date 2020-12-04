@@ -14,7 +14,8 @@
     "@nuxt/typescript-runtime": "^2.0.0",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
-    "portal-vue": "^2.1.7"
+    "portal-vue": "^2.1.7",
+    "vue-draggable-resizable": "^2.2.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",
