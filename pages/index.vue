@@ -3,29 +3,47 @@
     <floatable
       v-for="(item, index) in items"
       :key="index"
-      :top="item.top"
-      :left="item.left"
-      :color="item.color"
+      :item="item"
+      :order="getOrder(item.id)"
+      @onDragStart="bringToFront(item.id)"
     >
       <div>{{ item.text }}</div>
     </floatable>
+    <PortalTarget name="floating-objects" multiple />
   </main>
 </template>
 
 <script>
+import { PortalTarget } from 'portal-vue'
 import floatable from '~/components/floatable.vue'
+
 export default {
   components: {
     floatable,
+    PortalTarget,
   },
   data() {
     return {
       items: [
-        { top: 0, left: 0, text: 'A', color: 'green' },
-        { top: 50, left: 50, text: 'B', color: 'red' },
-        { top: 100, left: 100, text: 'C', color: 'blue' },
+        { id: 'a', top: 0, left: 0, text: 'A', color: 'green' },
+        { id: 'b', top: 50, left: 50, text: 'B', color: 'red' },
+        { id: 'c', top: 100, left: 100, text: 'C', color: 'blue' },
       ],
+      floatingOrder: ['a', 'b', 'c'],
     }
+  },
+  methods: {
+    bringToFront(identifier) {
+      const newList = this.floatingOrder.filter((k) => k !== identifier)
+      newList.push(identifier)
+      this.floatingOrder = newList
+    },
+    getOrder(identifier) {
+      const notFound = -1
+      const index = this.floatingOrder.findIndex((k) => k === identifier)
+      const offset = 1 // portalが受け付けるorderが1始まりなので
+      return index === notFound ? this.floatingOrder.length + offset : index
+    },
   },
 }
 </script>

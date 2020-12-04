@@ -1,33 +1,35 @@
 <template>
-  <vue-draggable-resizable
-    class="absolute flex justify-center items-center shadow-md"
-    :class="[`bg-${color}-500`]"
-    :x="top"
-    :y="left"
-    :w="100"
-    :h="100"
-  >
-    <slot />
-  </vue-draggable-resizable>
+  <portal to="floating-objects" :order="order">
+    <vue-draggable-resizable
+      :key="item.id"
+      class="absolute flex justify-center items-center shadow-md"
+      :class="[`bg-${item.color}-500`]"
+      :x="item.top"
+      :y="item.left"
+      :w="100"
+      :h="100"
+      @activated="$emit('onDragStart')"
+    >
+      <slot />
+    </vue-draggable-resizable>
+  </portal>
 </template>
 
 <script>
 import VueDraggableResizable from 'vue-draggable-resizable'
+import { Portal } from 'portal-vue'
 export default {
   components: {
     VueDraggableResizable,
+    Portal,
   },
   props: {
-    top: {
-      type: Number,
+    item: {
+      type: Object,
       required: true,
     },
-    left: {
+    order: {
       type: Number,
-      required: true,
-    },
-    color: {
-      type: String,
       required: true,
     },
   },
