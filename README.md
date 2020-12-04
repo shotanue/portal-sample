@@ -1,5 +1,10 @@
 # portal-sample
 
+DOMの前後関係(z軸)をPortalVueを使って制御するサンプル実装です。  
+
+DEMO  
+https://portal-sample.vercel.app/
+
 ## Build Setup
 
 ```bash
